@@ -26,4 +26,4 @@ As suggested by the paper in the reference, here are the values of the hyper-par
 * Different applications requires different loss function; for instance, the loss function in Neural Style Transfer uses Gram matrices as a mean to estimate the "style" of an image. Many application requires extremely complicated loss function, some of them are even considered intractable. For example, it is almost impossible to design a loss function for a regular Convolutional Decoder to map a random noise to a realistic human face.
 * The core idea of GAN is that it can automatically learn the Loss function for us! The Loss function is a function of the Discriminator, and the Discriminator is technically a set of trainable parameters. As a result, our loss function is trainable, and it is trained until it cannot be improved any further, which mean D converges to an optimal point.
 * Loss function: **L(G)=log(D(G(z)))**, where G* = argmax log(D(G(z))
-* **L(G)** can be learned automatically without having to be explicitly defined and engineered.
+* **L(G)** can be learned automatically without having to be explicitly defined in non-GAN learning algorithms.
