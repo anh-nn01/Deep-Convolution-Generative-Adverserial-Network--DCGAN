@@ -13,5 +13,5 @@ As suggested by the paper in the reference, here are the values of the hyper-par
 
 # Dataset:
 * The GAN model was trained and tested on CelebA dataset. The Generator was trained to capture the data distribution of human face on CelebA dataset and tried to generate new human faces as realistic as possible.
-* You can download the dataset to your local machine here: https://drive.google.com/drive/folders/0B7EVK8r0v71pTUZsaXdaSnZBZzg.
+* You can download the dataset to your local machine [here](https://drive.google.com/drive/folders/0B7EVK8r0v71pTUZsaXdaSnZBZzg).
 
