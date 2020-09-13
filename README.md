@@ -16,8 +16,17 @@ As suggested by the paper in the reference, here are the values of the hyper-par
 * You can download the dataset to your local machine [here](https://drive.google.com/drive/folders/0B7EVK8r0v71pTUZsaXdaSnZBZzg).
 
 # Generator Architecture
+* The Generator Architecture is the Decoder part in Encoder-Decoder architecture. The Generator was trained to map a random noise with size **(100x1x1)** to an image of human face with size **(3x64x64)**.
+* The architecture:
+
+(Transpose Convolution - BatchNorm - ReLU) * 4 - (Transpose Convolution - Tanh)
 
 # Discriminator Architecture
+* The Discriminator Architecture is a Binary Convolutional Classifier, which was trained to classified outputs from the Generator as "fake" (labeled 0) and the real images from dataset as "real" (labeled 1). The expected input for the Discriminator Convolutional Neural Network is a batch of images with size **(3x64x64)** 
+
+* The architecture:
+
+(Convolution - LeakyReLU) - (Convolution - BatchNorm - LeakyReLU) * 3 - (Convolution - Sigmoid)
 
 # Training scheme
 
