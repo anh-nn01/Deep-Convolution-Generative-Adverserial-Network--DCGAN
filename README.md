@@ -29,11 +29,13 @@ As suggested by the paper in the reference, here are the values of the hyper-par
 (Convolution - LeakyReLU) - (Convolution - BatchNorm - LeakyReLU) * 3 - (Convolution - Sigmoid)
 
 # Training scheme
-* Loss function
+* Loss function (explain log)
 
 * Learn and capture distribution of human faces from Celeb A Dataset and try to map noise z to an image with similar data distribution to ouput realistic faces.
 
-* When there is room for improvement, the discriminator can still exploit the data distribution mismatches between Generator's ouputs and training dataset to distinguish "real" and "fake" data. When the Generator becomes better, however, the data distribution of the Generated outputs converges to that of real data, hence the Discriminator can no longer exploit the data distribution mismatches to correctly classify "real" and "fake" images. Intuitively, the generated images are too realistic to be classified as "fake", hence the Generator is successfully trained to generate realistic faces.
+* When there is still room for improvement, the discriminator can still exploit the data distribution mismatches between Generator's ouputs and training dataset to distinguish "real" and "fake" data. When the Generator becomes better, however, the data distribution of the Generated outputs converges to that of real data, hence the Discriminator can no longer exploit the data distribution mismatches to correctly classify "real" and "fake" images. Intuitively, the generated images are too realistic to be classified as "fake", hence the Generator is successfully trained to generate realistic faces.
+
+* In practice, the Generator and the Discriminator might never converge to such equilibirium state; therefore, the ouptuts may not perfectly realistic to human eyes but only have roughly similar distribtion with acceptable level of realism.
 
 # Core Idea of GAN
 * In machine learning, although the algorithms can automatically optimize and update the parameters to capture the distribution of the dataset, it is still human's work to specify the optimization objective of the algorithm. Specifically, we still need to hand-engineer the loss function so that machine learning algorithm can optimize on that loss function (in other words, loss function is a mean to communicate with a learning algorithm). 
