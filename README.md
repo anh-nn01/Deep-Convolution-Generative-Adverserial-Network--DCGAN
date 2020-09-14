@@ -53,3 +53,16 @@ The loss fucntion of the Generator has the same idea with that of the Discrimina
 * **L(G)** can be learned automatically without having to be explicitly defined in non-GAN learning algorithms.
 
 # Result
+* Notable Outputs:
+
+* What is good and what can be further improved:
+1. Good:<br>
+- The Generator is successfull in capturing overall structure of human faces.<br>
+- Some outputs have highly realistic details.<br>
+- The Generator maps completely random, non-sense noise to a regconizable human faces, which is impressive as facial feature distribution are very hard to capture to regenerate such distribution.<br>
+- The outputs have high variance in emotion, facial features (such as eyes, nose, etc), and angle from the camera.
+
+2. What can be improved:<br>
+- Some outputs are not realistic, or even scarry (you can load my Generator's weights and try it yourself) :))<br>
+- Low resolution. You can train the Generator and Discriminator on inputs with higher resolution. Make sure you have access to sufficiently powerful GPUs to do this.<br>
+- Most of the outputted faces resemble white people's features. This is due to the Celeb A dataset contains mostly images of white celebrity, which causes the Generator learn to capture only the data distribution of white's people face. You can fix this by adding an equivalent number of datapoints of non-white people to the original dataset and train your GAN on this new dataset.
