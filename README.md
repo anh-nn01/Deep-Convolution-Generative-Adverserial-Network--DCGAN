@@ -28,22 +28,36 @@ As suggested by the paper in the reference, here are the values of the hyper-par
 
 (Convolution - LeakyReLU) - (Convolution - BatchNorm - LeakyReLU) * 3 - (Convolution - Sigmoid)
 
+<br>
+**Architecture:** <br>
+<img src="Img/Architecture.jpg">
+
 # Training scheme
 * **Loss function**
 1) Discriminator:<br>
 The optimal Discriminator is:<br>
-Explanation:<br>
-The Discriminator is simply a Binary Classifier with Convolutional Layers and Dense Layers. Its objective is to classify training data as "real" data and generated data (outputs from the Generator) as "fake". To do this, we use a log likelihood loss function to measure how far the label of "real" data from 1.0 and how far the label of "fake" data from 0.0. Normally, we should minimize this loss function. However, in the formula above, we take **argmax** because log loss functions are usually written with a negative sign before the log function. Minimizing the negation of such loss function is equivalent to maximizing the above loss function (without negative sign).
+<img src="Img/DiscLoss.jpg"><br>
+Where **x** is the training data (real), **z** is the noise, **G(z)** is the generated data from noise **z** (fake), and **D** is the Discriminator.<br>
+        - Explanation:<br>
+        The Discriminator is simply a Binary Classifier with Convolutional Layers and Dense Layers. Its objective is to classify training data as "real" data and generated data (outputs from the Generator) as "fake". To do this, we use a log likelihood loss function to measure how far the label of "real" data from 1.0 and how far the label of "fake" data from 0.0. Normally, we should minimize this loss function. However, in the formula above, we take **argmax** because log loss functions are usually written with a negative sign before the log function. Minimizing the negation of such loss function is equivalent to maximizing the above loss function (without negative sign).
 
 2) Generator<br>
 The optimal Generator is:<br>
-Explanation:<br>
-The loss fucntion of the Generator has the same idea with that of the Discriminator. The difference is that instead of trying to classify "fake" and "real" images, the Generator learns to generate "fake" images as realistic as possible. Therefore, one way to measure and optimize this realism is to use the Discriminator: while training the Generator, we want the Discriminator's outputs for the "fake" images to be close to 1.0, instead of 0.0. In other words, to train the Generator, we label generated images as 1.0 ("real"). The gradient descent optimization for the Generator works exactly as it does for the Discriminator.
+<img src="Img/GenLoss.jpg"><br>
+Where **z** is the noise, **G(z)** is the generated data from noise **z**, and **D** is the Discriminator.<br>
+        - Explanation:<br>
+        The loss fucntion of the Generator has the same idea with that of the Discriminator. The difference is that instead of trying to classify "fake" and "real" images, the Generator learns to generate "fake" images as realistic as possible. Therefore, one way to measure and optimize this realism is to use the Discriminator: while training the Generator, we want the Discriminator's outputs for the "fake" images to be close to 1.0, instead of 0.0. In other words, to train the Generator, we label generated images as 1.0 ("real"). The gradient descent optimization for the Generator works exactly as it does for the Discriminator.
 
 * Training scheme:<br>
     - First, the Discriminator was trained on the dataset to classify those data as "real". Next, the Generator will take a batch of random noises and outputs generated images. Those generated images were used to trained the Discriminator to regconize "fake" images. By training the Discriminator on both "real" and "fake' images, the Discriminator not only captures the data distribution of real faces but also that of generated faces and learns to distinguish two data distributions. While the Discriminator trains its weights, the weights of the Generator becomes independent parameters (frozen)<br>
     - Second, the Generator was trained so that the Discriminator classifies its outputs as "real". From the first step, the Discriminator has learned to capture the data distribution of real images, thus the Generator can use the Discriminator in its loss function and exploit the Discriminator's knowledge to optimize the data distribution of generated images so that it converges to that of real images.
     - We repeat step 1 and step 2 until the data distribution of generated images converges to that of real images. At this point, the Generator can generate realistic images and the Discriminator can no longer exploit the distribution mismatch between the dataset and the generated data to classify generated data as "fake".
+    
+    <img src="Img/Distribution.jpg"><br>
+        - Dotted black curve represents dataset distribution (or "real" distribution/ desirable target distribution) - Distribution of **x**<br>
+        - Green curve represents current output distribution of the Generator - Distribution of **G(z)**<br>
+        - Dotted Blue curve represents the Discriminator. This curve must divide the real distribution and the generated distribution as much as possible.<br>
+        - After each training epoch, the distribution of **G(z)** gradually converges to that of **x**, and the Discriminator can no longer exploit the difference in distribution to classify the two classes correctly.
 
 
 * The Generator tries to learn and capture distribution of human faces from Celeb A Dataset and then maps the noise z to an image with similar data distribution to ouput realistic faces. When both the Generator and the Discriminator are trained, they eventually converges to the optimal point where the Generator can generate realistic outputs. The intuition is that when there is still room for improvement, the discriminator can still exploit the data distribution mismatches between Generator's ouputs and training dataset to distinguish "real" and "fake" data. When the Generator becomes better, however, the data distribution of the Generated outputs converges to that of real data, hence the Discriminator can no longer exploit the data distribution mismatches to correctly classify "real" and "fake" images. Intuitively, the generated images are too realistic to be classified as "fake", hence the Generator is successfully trained to generate realistic faces.
