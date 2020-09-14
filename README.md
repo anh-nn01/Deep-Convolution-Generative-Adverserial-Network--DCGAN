@@ -90,6 +90,6 @@ Where **z** is the noise, **G(z)** is the generated data from noise **z**, and *
     - The outputs have high variance in emotion, facial features (such as eyes, hair, hair color, face shape, etc), and angle from the camera.
 
 2. What can be improved:<br>
-    - Some outputs are not realistic, or even scarry (you can load my Generator's weights and try it yourself) :))<br>
+    - Some outputs are not realistic, or even scarry (you can load my Generator's weights and try it yourself) :)) My Generator was trained for 100 epochs. You can try training the model for longer to see whether there are any improvements in the output quality. <br>
     - Low resolution. You can train the Generator and Discriminator on inputs with higher resolution. Make sure you have access to sufficiently powerful GPUs to do this.<br>
     - Most of the outputted faces resemble white people's features. This is due to the fact that Celeb A dataset contains mostly images of white celebrity, which causes the Generator learn to capture only the data distribution of white's people face. You can fix this by adding an equivalent number of datapoints of non-white people to the original dataset and train your GAN on this new dataset.
