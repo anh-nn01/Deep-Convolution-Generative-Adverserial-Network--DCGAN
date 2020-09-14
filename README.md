@@ -29,13 +29,23 @@ As suggested by the paper in the reference, here are the values of the hyper-par
 (Convolution - LeakyReLU) - (Convolution - BatchNorm - LeakyReLU) * 3 - (Convolution - Sigmoid)
 
 # Training scheme
-* Loss function (explain log)
+* **Loss function**
+1) Discriminator:<br>
+The optimal Discriminator is:<br>
 
-* Learn and capture distribution of human faces from Celeb A Dataset and try to map noise z to an image with similar data distribution to ouput realistic faces.
+<br>Explanation:<br>
+The Discriminator is simply a Binary Classifier with Convolutional Layers and Dense Layers. Its objective is to classify training data as "real" data and generated data (outputs from the Generator) as "fake". To do this, we use a log likelihood loss function to measure how far the label of "real" data from 1.0 and how far the label of "fake" data from 0.0. Normally, we should minimize this loss function. However, in the formula above, we take **argmax** because log loss functions are usually written with a negative sign before the log function. Minimizing the negation of such loss function is equivalent to maximizing the above loss function (without negative sign).
 
-* When there is still room for improvement, the discriminator can still exploit the data distribution mismatches between Generator's ouputs and training dataset to distinguish "real" and "fake" data. When the Generator becomes better, however, the data distribution of the Generated outputs converges to that of real data, hence the Discriminator can no longer exploit the data distribution mismatches to correctly classify "real" and "fake" images. Intuitively, the generated images are too realistic to be classified as "fake", hence the Generator is successfully trained to generate realistic faces.
+2) Generator<br>
+The optimal Generator is:<br>
 
-* In practice, the Generator and the Discriminator might never converge to such equilibirium state; therefore, the ouptuts may not perfectly realistic to human eyes but only have roughly similar distribtion with acceptable level of realism.
+<br>Explanation:<br>
+The loss fucntion of the Generator has the same idea with that of the Discriminator. The difference is that instead of trying to classify "fake" and "real" images, the Generator learns to generate "fake" images as realistic as possible. Therefore, one way to measure and optimize this realism is to use the Discriminator: while training the Generator, we want the Discriminator's outputs for the "fake" images to be close to 1.0, instead of 0.0. In other words, to train the Generator, we label generated images as 1.0 ("real"). The gradient descent optimization for the Generator works exactly as it does for the Discriminator.
+
+
+* The Generator tries to learn and capture distribution of human faces from Celeb A Dataset and then maps the noise z to an image with similar data distribution to ouput realistic faces. When both the Generator and the Discriminator are trained, they eventually converges to the optimal point where the Generator can generate realistic outputs. The intuition is that when there is still room for improvement, the discriminator can still exploit the data distribution mismatches between Generator's ouputs and training dataset to distinguish "real" and "fake" data. When the Generator becomes better, however, the data distribution of the Generated outputs converges to that of real data, hence the Discriminator can no longer exploit the data distribution mismatches to correctly classify "real" and "fake" images. Intuitively, the generated images are too realistic to be classified as "fake", hence the Generator is successfully trained to generate realistic faces.
+
+* In practice, the Generator and the Discriminator might never converge to such equilibirium state; therefore, the outputs may not perfectly realistic to human eyes but only have roughly similar distribtion with acceptable level of realism.
 
 # Core Idea of GAN
 * In machine learning, although the algorithms can automatically optimize and update the parameters to capture the distribution of the dataset, it is still human's work to specify the optimization objective of the algorithm. Specifically, we still need to hand-engineer the loss function so that machine learning algorithm can optimize on that loss function (in other words, loss function is a mean to communicate with a learning algorithm). 
@@ -43,3 +53,5 @@ As suggested by the paper in the reference, here are the values of the hyper-par
 * The core idea of GAN is that it can automatically learn the Loss function for us! The Loss function is a function of the Discriminator, and the Discriminator is technically a set of trainable parameters. As a result, our loss function is trainable, and it is trained until it cannot be improved any further, which mean D converges to an optimal point.
 * Loss function: **L(G)=log(D(G(z)))**, where G* = argmax log(D(G(z))
 * **L(G)** can be learned automatically without having to be explicitly defined in non-GAN learning algorithms.
+
+# Result
