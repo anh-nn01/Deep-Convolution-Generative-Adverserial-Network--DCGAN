@@ -73,14 +73,14 @@ Where **z** is the noise, **G(z)** is the generated data from noise **z**, and *
 
 # Result
 * Notable Outputs:<br>
-<img src="1.jpg"><br>
-<img src="2.jpg"><br>
-<img src="3.jpg"><br>
-<img src="4.jpg"><br>
-<img src="5.jpg"><br>
-<img src="6.jpg"><br>
-<img src="7.jpg"><br>
-<img src="8.jpg"><br>
+<img src="Img/1.jpg"><br>
+<img src="Img/2.jpg"><br>
+<img src="Img/3.jpg"><br>
+<img src="Img/4.jpg"><br>
+<img src="Img/5.jpg"><br>
+<img src="Img/6.jpg"><br>
+<img src="Img/7.jpg"><br>
+<img src="Img/8.jpg"><br>
 * What is good and what can be further improved:
 1. Good:<br>
     - The Generator is successfull in capturing overall structure of human faces.<br>
