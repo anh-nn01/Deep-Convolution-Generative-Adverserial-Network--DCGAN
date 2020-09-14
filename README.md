@@ -54,10 +54,11 @@ Where **z** is the noise, **G(z)** is the generated data from noise **z**, and *
     - We repeat step 1 and step 2 until the data distribution of generated images converges to that of real images. At this point, the Generator can generate realistic images and the Discriminator can no longer exploit the distribution mismatch between the dataset and the generated data to classify generated data as "fake".
     
     <img src="Img/Distribution.jpg"><br>
-        - Dotted black curve represents dataset distribution (or "real" distribution/ desirable target distribution) - Distribution of **x**<br>
-        - Green curve represents current output distribution of the Generator - Distribution of **G(z)**<br>
-        - Dotted Blue curve represents the Discriminator. This curve must divide the real distribution and the generated distribution as much as possible.<br>
-        - After each training epoch, the distribution of **G(z)** gradually converges to that of **x**, and the Discriminator can no longer exploit the difference in distribution to classify the two classes correctly.
+    **The graph above was taken from the GAN paper in the reference**<br>
+                        - Dotted black curve represents dataset distribution (or "real" distribution/ desirable target distribution) - Distribution of **x**<br>
+                        - Green curve represents current output distribution of the Generator - Distribution of **G(z)**<br>
+                        - Dotted Blue curve represents the Discriminator. This curve must divide the real distribution and the generated distribution as much as possible.<br>
+                        - After each training epoch, the distribution of **G(z)** gradually converges to that of **x**, and the Discriminator can no longer exploit the difference in distribution to classify the two classes correctly.
 
 
 * The Generator tries to learn and capture distribution of human faces from Celeb A Dataset and then maps the noise z to an image with similar data distribution to ouput realistic faces. When both the Generator and the Discriminator are trained, they eventually converges to the optimal point where the Generator can generate realistic outputs. The intuition is that when there is still room for improvement, the discriminator can still exploit the data distribution mismatches between Generator's ouputs and training dataset to distinguish "real" and "fake" data. When the Generator becomes better, however, the data distribution of the Generated outputs converges to that of real data, hence the Discriminator can no longer exploit the data distribution mismatches to correctly classify "real" and "fake" images. Intuitively, the generated images are too realistic to be classified as "fake", hence the Generator is successfully trained to generate realistic faces.
@@ -80,7 +81,7 @@ Where **z** is the noise, **G(z)** is the generated data from noise **z**, and *
 <img src="Img/5.jpg"><br>
 <img src="Img/6.jpg"><br>
 <img src="Img/7.jpg"><br>
-<img src="Img/8.jpg"><br>
+<img src="Img/8.jpg"><br><br><br>
 * What is good and what can be further improved:
 1. Good:<br>
     - The Generator is successfull in capturing overall structure of human faces.<br>
