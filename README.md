@@ -1,5 +1,5 @@
 # Generative-Adverserial-Network--DCGAN
-PyTorch implementation of the original GAN algorithm from scratch.
+PyTorch implementation of the DCGAN algorithm from scratch.
 
 **Reference: https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf**
 
